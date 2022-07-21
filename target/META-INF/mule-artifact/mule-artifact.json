@@ -1,0 +1,30 @@
+{
+  "configs": [
+    "tut-session-4.xml"
+  ],
+  "secureProperties": [],
+  "redeploymentEnabled": true,
+  "name": "com.mycompany:tut-session-4:1.0.0-SNAPSHOT",
+  "minMuleVersion": "4.4.0",
+  "requiredProduct": "MULE_EE",
+  "classLoaderModelLoaderDescriptor": {
+    "id": "mule",
+    "attributes": {
+      "exportedPackages": [],
+      "exportedResources": [
+        "tut-session-4.xml",
+        "application-types.xml",
+        "log4j2.xml",
+        "ext/app-dev.properties",
+        "ext/app-test.properties",
+        "ext/config.properties",
+        "ext/app2.properties",
+        "ext/dev.yaml"
+      ]
+    }
+  },
+  "bundleDescriptorLoader": {
+    "id": "mule",
+    "attributes": {}
+  }
+}

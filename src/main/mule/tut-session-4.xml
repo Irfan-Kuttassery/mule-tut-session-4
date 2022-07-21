@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns:file="http://www.mulesoft.org/schema/mule/file"
+	xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/file http://www.mulesoft.org/schema/mule/file/current/mule-file.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="2d342319-d5c0-457e-868e-fa0012332429" >
+		<http:listener-connection host="0.0.0.0" port="8081" />
+	</http:listener-config>
+	<file:config name="File_Config" doc:name="File Config" doc:id="d1133175-bec6-4faf-92fb-70092967e64d" />
+	<global-property doc:name="Global Property" doc:id="47f7fe19-b4a7-4ca4-b7de-fb4530a96e46" name="app" value="app" />
+	<configuration-properties doc:name="Configuration properties" doc:id="20284c4c-64d8-458c-8b27-c40a9a727bd1" file="ext/app-${mule.env}.properties" />
+	<global-property doc:name="Global Property" doc:id="412a64bf-2feb-4ae2-b14d-103d22a39ad7" name="mule.env" value="test" />
+	<configuration-properties doc:name="Configuration properties" doc:id="343289fb-51f7-40a9-b906-95c583525090" file="ext/dev.yaml" />
+	<flow name="tut-session-4Flow" doc:id="d944675e-8d02-450a-918d-77a93bf00523" >
+		<http:listener doc:name="Listener" doc:id="615d4f95-1b3f-4b27-b5a4-00efbdd925bd" config-ref="HTTP_Listener_config" path="/test"/>
+		<set-variable value="#[attributes.queryParams.name]" doc:name="name" doc:id="e8c10f3d-249a-453b-9240-dc3203978610" variableName="name"/>
+		<set-variable value="#[attributes.method]" doc:name="method" doc:id="4db08a9e-cd36-4bf0-a46e-a4ef1131ae44" variableName="method"/>
+		<ee:transform doc:name="Transform Message" doc:id="4f42d314-10e9-4f52-a738-27f0734c0a8f" >
+			<ee:message >
+				<ee:set-payload ><![CDATA['helloo']]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+		<set-payload value="helloo" doc:name="Set Payload" doc:id="b22ed5b8-c654-4760-83e3-99d39adfeb63" />
+		<logger level="INFO" doc:name="Logger" doc:id="ebf6db2b-1005-458e-9519-eebf5e391a63" message='${db.userName}' />
+	</flow>
+	<flow name="tut-session-4-private-flow" doc:id="b9577419-71b7-43f9-94ea-f8b188dd505e" >
+		<set-payload value="Hi you are in private flow" doc:name="private flow payload" doc:id="b109fea1-23a8-496d-8a96-679bea4a9437" />
+	</flow>
+	<sub-flow name="tut-session-4-sub-flow" doc:id="935ba134-8251-4bf3-b82b-dcacaf59c36b" >
+		<set-payload value="Hi you are in sub-flow" doc:name="sub-flow payload" doc:id="835c4c1a-8654-445a-aeec-1f385e096c4f" />
+	</sub-flow>
+</mule>

@@ -1,0 +1,10 @@
+http:
+  port:"8081"
+  host:"localhost"
+db:
+  userName: "irfan"
+  passWord: "12345"
+  dbName: "aws"
+ 
+message: "Helloo yaml"
+message.check: "checking message"
